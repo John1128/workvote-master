@@ -1,0 +1,76 @@
+{
+  "version": 2,
+  "name": "workvote",
+  "alias": "work.vote",
+  "builds": [
+    { "src": "api/poll.js", "use": "@now/node" },
+    { "src": "api/actions.js", "use": "@now/node" },
+    { "src": "api/oauth.js", "use": "@now/node" },
+    { "src": "api/subscriptions.js", "use": "@now/node" },
+    { "src": "api/user.js", "use": "@now/node" },
+    { "src": "api/logout.js", "use": "@now/node" },
+    { "src": "api/cancel_subscription.js", "use": "@now/node" },
+    { "src": "api/change_subscription.js", "use": "@now/node" },
+    { "src": "frontend/next.config.js", "use": "@now/next"},
+    { "src": "frontend/static/*", "use": "@now/static" }
+  ],
+  "env": {
+    "CLIENT_ID": "770951425620.869325594967",
+    "CLIENT_SECRET": "cdcfba40030e057e8cb7bf1472b6c19e",
+    "FAUNA_SECRET": "fnADfRxuqnACE2iUjPj2Uf6Gm3Vx1RaUv6FoklMS",
+    "STRIPE_SECRET": "sk_test_ALaYxQpVEPA62pn3VfMVLjXi001hu1opKC",
+    "SLACK_SIGNING_SECRET": "a0f70086ab6de39a628e3cc462f027b4"
+  },
+  "routes": [
+    {
+      "src": "^/poll",
+      "dest": "/api/poll.js"
+    },
+    {
+      "src": "^/oauth",
+      "dest": "/api/oauth.js"
+    },
+    {
+      "src": "^/actions",
+      "dest": "/api/actions.js"
+    },
+    {
+      "src": "^/subscriptions",
+      "dest": "/api/subscriptions.js"
+    },
+    {
+      "src": "^/cancel_subscription",
+      "dest": "/api/cancel_subscription.js"
+    },
+        {
+      "src": "^/change_subscription",
+      "dest": "/api/change_subscription.js"
+    },
+    {
+      "src": "^/user",
+      "dest": "/api/user.js"
+    },
+    {
+      "src": "^/logout",
+      "dest": "/api/logout.js"
+    },
+    {
+      "src": "^/",
+      "dest": "/frontend/"
+    },
+    {
+      "src": "^/privacy",
+      "dest": "/frontend/privacy"
+    },
+    {
+      "src": "^/static/(.*)",
+      "dest": "/frontend/static/$1",
+      "headers": {"cache-control": "s-maxage=31536000"}
+    },
+    {
+      "src": "^/_next/static/(.*)$",
+      "dest": "/frontend/_next/static/$1",
+      "headers": {"cache-control": "s-maxage=31536000"}
+    }
+  ]
+}
